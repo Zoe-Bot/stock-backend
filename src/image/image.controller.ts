@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Patch, Post, ValidationPipe } from '@nestjs/common';
+import { Types } from 'mongoose';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
 import { Image } from './image.schema';
@@ -21,12 +22,12 @@ export class ImageController {
         return this.imageService.create(data)
     }
 
-    @Patch("/:uri")
+    @Patch("/:id")
     async update(@Body(new ValidationPipe({
         transform: true,
         whitelist: true
-    })) data : UpdateImageDto, @Param('uri') uri: string) {
-        return this.imageService.update(data, uri)
+    })) data : UpdateImageDto, @Param('id') id: Types.ObjectId) {
+        return this.imageService.update(data, id)
     }
 
 }

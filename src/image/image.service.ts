@@ -1,6 +1,6 @@
 import { ConflictException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Mongoose, Types } from 'mongoose';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
 import { Image, ImageDocument } from './image.schema';
@@ -30,11 +30,13 @@ export class ImageService {
         }
     }
 
-    async update(data: UpdateImageDto, uri: string) {
+    async update(data: UpdateImageDto, id: Types.ObjectId) {
         try {
-            const image = await this.imageSchema.findOneAndUpdate({ uri }, data, {
+            const image = await this.imageSchema.findByIdAndUpdate(id, data, {
                 new: true
             })
+
+            console.log(image.id)
 
             return image
         } catch(error) {

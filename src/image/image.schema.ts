@@ -1,8 +1,11 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document } from "mongoose";
+import { Document, Types } from "mongoose";
 
 @Schema({ timestamps: true })
 export class Image {
+
+    id?: Types.ObjectId
+    
     @Prop({ unique: true })
     uri: string
 

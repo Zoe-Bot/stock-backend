@@ -13,9 +13,9 @@ Content-Type: application/json
 }
 
 ### Update Image
-PATCH http://localhost:3000/image/123
+PATCH http://localhost:3000/image/610bc0c2ce13ee0718955a71
 Content-Type: application/json
 
 {
-    "category": "hg"
+    "category": "jhj"
 }
