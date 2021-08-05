@@ -19,3 +19,15 @@ Content-Type: application/json
 {
     "category": "jhj"
 }
+
+### Delete Image
+DELETE http://localhost:3000/image/delete/610c32ecb6a89d3f78592362
+
+
+###
+POST http://localhost:3000/image/?id=32053209
+Content-Type: application/json
+
+{
+    "xx": "xx"
+}

@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { ConflictException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Mongoose, Types } from 'mongoose';
 import { CreateImageDto } from './dto/create-image.dto';
@@ -41,6 +41,17 @@ export class ImageService {
             return image
         } catch(error) {
             throw new InternalServerErrorException()
+        }
+    }
+
+    async delete(id: Types.ObjectId) {
+        const result = await this.imageSchema.findByIdAndDelete(id)
+
+        if (result === null)
+            throw new NotFoundException()
+
+        return {
+            result
         }
     }
 }

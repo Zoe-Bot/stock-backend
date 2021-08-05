@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, ValidationPipe } from '@nestjs/common';
 import { Types } from 'mongoose';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
@@ -19,7 +19,7 @@ export class ImageController {
         transform: true,
         whitelist: true
     })) data: CreateImageDto) {
-        return this.imageService.create(data)
+        return await this.imageService.create(data)
     }
 
     @Patch("/:id")
@@ -27,7 +27,12 @@ export class ImageController {
         transform: true,
         whitelist: true
     })) data : UpdateImageDto, @Param('id') id: Types.ObjectId) {
-        return this.imageService.update(data, id)
+        return await this.imageService.update(data, id)
     }
 
+    @HttpCode(204)
+    @Delete('/delete/:id')
+    async delete(@Param('id') id: Types.ObjectId) {
+        return await this.imageService.delete(id)
+    }
 }
