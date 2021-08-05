@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, ValidationPipe } from '@nestjs/common';
 import { CreateImageDto } from './dto/create-image.dto';
+import { UpdateImageDto } from './dto/update-image.dto';
 import { Image } from './image.schema';
 import { ImageService } from './image.service';
 
@@ -19,4 +20,13 @@ export class ImageController {
     })) data: CreateImageDto) {
         return this.imageService.create(data)
     }
+
+    @Patch("/:uri")
+    async update(@Body(new ValidationPipe({
+        transform: true,
+        whitelist: true
+    })) data : UpdateImageDto, @Param('uri') uri: string) {
+        return this.imageService.update(data, uri)
+    }
+
 }
