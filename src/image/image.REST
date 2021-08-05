@@ -1,2 +1,13 @@
 ### Find All Images
 GET http://localhost:3000/image
+
+
+### Create image
+POST http://localhost:3000/image
+Content-Type: application/json
+
+{
+    "tags": ["xxx", "yyy", 4354],
+    "uri": "123",
+    "category": "Animals"
+}
