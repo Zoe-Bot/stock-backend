@@ -24,6 +24,6 @@ export class UserService {
     }
 
     async findbyUsername(username: string): Promise<User | undefined> {
-        return this.userSchema.findOne({ username: username }).exec()
+        return await this.userSchema.findOne({ username }).lean()
     }
 }

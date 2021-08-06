@@ -1,6 +1,6 @@
 ### Private Route
 GET http://localhost:3000/api/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhhaGEiLCJpYXQiOjE2MjgyNjQ5MDgsImV4cCI6MTYyODMwMDkwOH0.-u_2I7TRD_1jOk2J6_JXPxMwjnvD_mc8p6s32bX5p5s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhhaGEiLCJzdWIiOiI2MTBkNjQ3NGU0NTc4MDBmZjU2MjNjZTQiLCJpYXQiOjE2MjgyNjgxNjYsImV4cCI6MTYyODMwNDE2Nn0.oiH4LBM3vAb5F3Y6-omcsgfqiins7wqqDHMQ6vHHXVs
 
 ### Private Route unauthorized
 GET http://localhost:3000/api/user

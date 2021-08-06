@@ -15,7 +15,7 @@ export class AuthController {
 
     @UseGuards(LocalAuthGuard)
     @Post('/login')
-    async login(@Body(ValidationPipe) credentials: any): Promise<any> {
-        return await this.authService.login(credentials)
+    async login(@Request() request): Promise<any> {
+        return await this.authService.login(request.user)
     }
 }
