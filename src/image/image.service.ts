@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, Mongoose, Types } from 'mongoose';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
-import { Image, ImageDocument } from './image.schema';
+import { Image, ImageDocument } from './schemas/image.schema';
 
 @Injectable()
 export class ImageService {
@@ -22,8 +22,8 @@ export class ImageService {
             const result = await image.save()
 
             return result
-        } catch(error) {
-            if(error.code === 11000)
+        } catch (error) {
+            if (error.code === 11000)
                 throw new ConflictException('uri must be unique')
             else
                 throw new InternalServerErrorException()

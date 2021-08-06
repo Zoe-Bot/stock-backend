@@ -1,27 +1,29 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UserDocument } from './schemas/user.schema';
 
 export type User = any;
 
 @Injectable()
 export class UserService {
-    private readonly users = [
-        {
-            userId: 1,
-            username: 'john',
-            password: 'changeme',
-        },
-        {
-            userId: 2,
-            username: 'maria',
-            password: 'guess',
-        },
-    ];
+    constructor(@InjectModel('User') private readonly userSchema: Model<UserDocument>) {}
 
-    async findOne(username: string): Promise<User | undefined> {
-        return this.users.find(user => user.username === username);
+    async create(credentials: CreateUserDto): Promise<User> {
+        try {
+            const user = new this.userSchema({
+                ...credentials
+            })
+            const result = await user.save()
+
+            return result
+        } catch (error) {
+            throw new InternalServerErrorException()
+        }
     }
 
-    profile() {
-        return "This is a profile"
+    async findbyUsername(username: string): Promise<User | undefined> {
+        return this.userSchema.findOne({ username: username }).exec()
     }
 }

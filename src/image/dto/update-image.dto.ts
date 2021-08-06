@@ -6,9 +6,9 @@ export class UpdateImageDto {
     @ArrayMinSize(3)
     @Type(() => String)
     @IsOptional()
-    tags: string[]
+    readonly tags: string[]
 
     @IsString()
     @IsOptional()
-    category: string
+    readonly category: string
 }

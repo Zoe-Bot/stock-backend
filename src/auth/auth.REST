@@ -1,15 +1,19 @@
-### Login (Get JWT Token)
-POST http://localhost:3000/auth/login
+### Register
+POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-    "username": "john",
-    "password": "changeme"
+    "username": "Haha",
+    "email": "hehe@gmail.com",
+    "password": "1234"
 }
 
-### Private Route
-GET http://localhost:3000/auth/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJzdWIiOjEsImlhdCI6MTYyODI1NzM3OCwiZXhwIjoxNjI4MjU3NDM4fQ.8AP-6DFkTOH7dmxNU2EDiHtYcVzmsu8UXifmk92B2CQ
+### Login (Get JWT Token)
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
 
-### Private Route unauthorized
-GET http://localhost:3000/auth/profile
+{
+    "username": "Haha",
+    "password": "1234"
+}
+

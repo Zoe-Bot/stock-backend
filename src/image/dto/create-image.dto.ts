@@ -5,9 +5,9 @@ export class CreateImageDto {
     @IsArray()
     @ArrayMinSize(3)
     @Type(() => String)
-    tags: string[]
+    readonly tags: string[]
 
     @IsString()
     @IsOptional()
-    category: string
+    readonly category: string
 }

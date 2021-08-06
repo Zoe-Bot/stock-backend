@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Validation
 import { Types } from 'mongoose';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
-import { Image } from './image.schema';
+import { Image } from './schemas/image.schema';
 import { ImageService } from './image.service';
 
 @Controller('image')

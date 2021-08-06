@@ -1,2 +1,11 @@
+### Private Route
+GET http://localhost:3000/api/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhhaGEiLCJpYXQiOjE2MjgyNjQ5MDgsImV4cCI6MTYyODMwMDkwOH0.-u_2I7TRD_1jOk2J6_JXPxMwjnvD_mc8p6s32bX5p5s
+
+### Private Route unauthorized
+GET http://localhost:3000/api/user
+
 ### Get Profile
-GET http://localhost:3000/user/profile
+GET http://localhost:3000/api/user/profile/Haha
+
+

@@ -1,9 +1,9 @@
 ### Find All Images
-GET http://localhost:3000/image
+GET http://localhost:3000/api/image
 
 
 ### Create image
-POST http://localhost:3000/image
+POST http://localhost:3000/api/image
 Content-Type: application/json
 
 {
@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### Update Image
-PATCH http://localhost:3000/image/610bc0c2ce13ee0718955a71
+PATCH http://localhost:3000/api/image/610bc0c2ce13ee0718955a71
 Content-Type: application/json
 
 {
@@ -21,11 +21,11 @@ Content-Type: application/json
 }
 
 ### Delete Image
-DELETE http://localhost:3000/image/delete/610c32ecb6a89d3f78592362
+DELETE http://localhost:3000/api/image/delete/610c32ecb6a89d3f78592362
 
 
 ###
-POST http://localhost:3000/image/?id=32053209
+POST http://localhost:3000/api/image/?id=32053209
 Content-Type: application/json
 
 {
