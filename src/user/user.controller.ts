@@ -1,6 +1,5 @@
 import { Body, Controller, Get, NotFoundException, Param, Post, Request, UseGuards } from '@nestjs/common';
 import { JWTAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { CreateUserDto } from './dto/create-user.dto';
 import { User, UserService } from './user.service';
 
 @Controller('user')
@@ -21,10 +20,5 @@ export class UserController {
             throw new NotFoundException()
 
         return profile
-    }
-
-    @Post()
-    async create(@Body() credentials: CreateUserDto): Promise<User> {
-        return this.userService.create(credentials)
     }
 }

@@ -1,8 +1,9 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateUserDto } from './dto/create-user.dto';
+import { RegisterDto } from 'src/auth/dto/register.dto';
 import { UserDocument } from './schemas/user.schema';
+import * as bcrypt from 'bcrypt'
 
 export type User = any;
 
@@ -10,10 +11,12 @@ export type User = any;
 export class UserService {
     constructor(@InjectModel('User') private readonly userSchema: Model<UserDocument>) {}
 
-    async create(credentials: CreateUserDto): Promise<User> {
+    async create(credentials: RegisterDto): Promise<User> {
         try {
+            const hash = await bcrypt.hash(credentials.password, 12)
             const user = new this.userSchema({
-                ...credentials
+                ...credentials,
+                password: hash
             })
             const result = await user.save()
 

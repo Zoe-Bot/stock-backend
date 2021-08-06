@@ -1,9 +1,8 @@
-import { IsEmail, IsString, MaxLength, MinLength } from "class-validator"
+import { IsEmail, IsString, Length, MinLength } from "class-validator"
 
-export class CreateUserDto {
+export class RegisterDto {
     @IsString()
-    @MinLength(3)
-    @MaxLength(20)
+    @Length(3, 20)
     readonly username: string
 
     @IsEmail()
