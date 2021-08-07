@@ -26,6 +26,10 @@ export class UserService {
         }
     }
 
+    async deleteUser(username: string): Promise<any> {
+        return await this.userSchema.findOneAndDelete({ username })
+    }
+
     async findbyUsername(username: string): Promise<User | undefined> {
         return await this.userSchema.findOne({ username }).lean()
     }

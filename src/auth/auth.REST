@@ -3,9 +3,10 @@ POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-    "username": "Helo",
-    "email": "haha@gmail.com",
-    "password": "1234"
+    "username": "Admin",
+    "email": "admin@gmail.com",
+    "password": "1234",
+    "role": "admin"
 }
 
 ### Login (Get JWT Token)

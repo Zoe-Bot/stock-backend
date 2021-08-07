@@ -11,4 +11,7 @@ export class RegisterDto {
     @IsString()
     @MinLength(4)
     readonly password: string
+
+    @IsString()
+    readonly role: string
 }

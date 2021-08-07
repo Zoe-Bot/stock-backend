@@ -1,6 +1,6 @@
 ### Private Route
 GET http://localhost:3000/api/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhhaGEiLCJzdWIiOiI2MTBkNjQ3NGU0NTc4MDBmZjU2MjNjZTQiLCJpYXQiOjE2MjgyNjgxNjYsImV4cCI6MTYyODMwNDE2Nn0.oiH4LBM3vAb5F3Y6-omcsgfqiins7wqqDHMQ6vHHXVs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6IkFkbWluIiwic3ViIjoiNjEwZTc5Nzk5MmU4ZTI0NDcwYjQ5ZmM1IiwiaWF0IjoxNjI4MzM4NTU1LCJleHAiOjE2MjgzNzQ1NTV9.TU9adAxlU_H7PPJV_6Lz7kyLt3dKXw8zntBzso7RXdg
 
 ### Private Route unauthorized
 GET http://localhost:3000/api/user
@@ -8,4 +8,6 @@ GET http://localhost:3000/api/user
 ### Get Profile
 GET http://localhost:3000/api/user/profile/Haha
 
-
+### Delete User
+DELETE http://localhost:3000/api/user/Test
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsInVzZXJuYW1lIjoiSGVsbG8iLCJzdWIiOiI2MTBlNzQyNzZjN2I2MDI0MDQ4ODQ3MjUiLCJpYXQiOjE2MjgzMzg4MjgsImV4cCI6MTYyODM3NDgyOH0.QqIvzkA7q_NASamvzaqAVgz54G7AiyIDqU_xw73L-pU
