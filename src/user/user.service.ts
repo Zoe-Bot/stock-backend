@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, InternalServerErrorException, NotFoundException, Provider } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, InternalServerErrorException, NotFoundException, Provider } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -36,16 +36,6 @@ export class UserService {
       throw new InternalServerErrorException("User Create failed")
 
     }
-  }
-
-  async parseJWTtOUsable(JWTuser): Promise<UserDocument> {
-    let user = await this.userSchema.findById(JWTuser.userId)
-
-    if (!user) {
-      throw new NotFoundException()
-    }
-
-    return user
   }
 
   /**

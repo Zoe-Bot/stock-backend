@@ -5,11 +5,11 @@ import { UserModule } from '../user/user.module';
 import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './strategies/local/local.strategy';
 import { JwtModule } from '@nestjs/jwt';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './strategies/jwt/jwt.strategy';
 import { GoogleStrategy } from './strategies/google/google.strategy';
 import { FacebookStrategy } from './strategies/facebook/facebook.strategy';
 import { DiscordStrategy } from './strategies/discord/discord.strategy';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   controllers: [AuthController],

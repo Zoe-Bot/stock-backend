@@ -78,23 +78,13 @@ export class AuthService {
      */
     async createLoginPayload(user: User): Promise<AccessTokenDto> {
         const payload = {
-            role: user.role,
             username: user.username,
-            sub: user._id
+            sub: user._id,
+            role: user.role
         }
 
         return {
             access_token: this.jwtService.sign(payload)
-        }
-    }
-
-    async googleLogin(req: any): Promise<any> {
-        if (!req.user)
-            return "No user from Google"
-        
-        return {
-            message: 'User information from google',
-            user: req.user
         }
     }
 }
