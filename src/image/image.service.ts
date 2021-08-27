@@ -35,9 +35,7 @@ export class ImageService {
             const image = await this.imageSchema.findByIdAndUpdate(id, data, {
                 new: true
             })
-
-            console.log(image.id)
-
+            
             return image
         } catch(error) {
             throw new InternalServerErrorException()
