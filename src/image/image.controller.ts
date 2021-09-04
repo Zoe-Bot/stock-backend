@@ -5,6 +5,7 @@ import { UpdateImageDto } from './dto/update-image.dto';
 import { Image } from './schemas/image.schema';
 import { ImageService } from './image.service';
 import { query } from 'express';
+import { DeleteTypeDto } from './dto/delete-type.dto';
 
 @Controller('image')
 export class ImageController {
@@ -38,7 +39,7 @@ export class ImageController {
 
     @HttpCode(204)
     @Delete('/:id')
-    async delete(@Param('id') id: ObjectId, @Query() query: any): Promise<void> {
-        return await this.imageService.delete(id, query.type)
+    async delete(@Param('id') id: ObjectId, @Query(new ValidationPipe()) { type }: DeleteTypeDto): Promise<void> {
+        return await this.imageService.delete(id, type)
     }
 }

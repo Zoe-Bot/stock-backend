@@ -4,13 +4,11 @@ import { ImageStatus } from "../enums/image-status.enum";
 
 @Schema({ timestamps: true })
 export class Image {
-    _id: ObjectId
-    
     @Prop({ unique: true, required: true })
     uri: string
 
     @Prop({ type: SchemaTypes.ObjectId, ref: 'User' })
-    author: ObjectId
+    author: ObjectId | Types.ObjectId
 
     @Prop()
     resolution: string
