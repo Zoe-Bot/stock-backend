@@ -1,22 +1,18 @@
-import { CanActivate, ExecutionContext, Injectable, Request } from "@nestjs/common";
+import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { Observable } from "rxjs";
-import { Role } from "./role.enum";
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-    constructor(private reflector: Reflector) { }
-
+    constructor(private reflector: Reflector) {}
+    
     canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
-        const requiredRoles = this.reflector.getAllAndOverride<Role[]>('roles', [
-            context.getHandler(),
-            context.getClass()
-        ])
-        
-        if (!requiredRoles)
+        const requiredRole = this.reflector.getAllAndOverride<string[]>('role', [context.getHandler(), context.getClass()])
+
+        if (!requiredRole) 
             return true
+
         const { user } = context.switchToHttp().getRequest()
-        console.log(context.switchToHttp().getRequest())
-        return requiredRoles.some(role => user.role?.includes(role))
+        return requiredRole.some(role => user.role?.includes(role))
     }
 }

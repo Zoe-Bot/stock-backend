@@ -1,32 +1,67 @@
-import { Body, Controller, Get, Post, Request, UseGuards, ValidationPipe } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { AuthService } from './auth.service';
+import { Post, Controller, Body, ValidationPipe, Request, UseGuards, Get, HttpCode } from '@nestjs/common';
 import { RegisterDto } from './dto/register.dto';
-import { GoogleAuthGuard } from './google/google-auth.guard';
-import { LocalAuthGuard } from './local/local-auth.guard';
+import { AuthService } from './auth.service'
+import { LocalAuthGuard } from './strategies/local/local-auth.guard';
+import { User } from '../user/entities/user.entity';
+import { GoogleAuthGuard } from './strategies/google/google-auth.guard';
+import { FacebookAuthGuard } from './strategies/facebook/facebook-auth.guard';
+import { DiscordAuthGuard } from './strategies/discord/discord-auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('users')
+@ApiTags('auth')
+@Controller('auth')
 export class AuthController {
-    constructor(private authService: AuthService) { }
+    constructor(private readonly authService: AuthService) {}
 
-    @Post()
-    async register(@Body(ValidationPipe) credentials: RegisterDto): Promise<any> {
-        return await this.authService.register(credentials)
+    @Post('register')
+    async registerUser(@Body(ValidationPipe) credentials: RegisterDto): Promise<User> {
+      return await this.authService.registerUser(credentials);
     }
-
+  
+    @Post('login')
     @UseGuards(LocalAuthGuard)
-    @Post('/login')
-    async jwtLogin(@Request() request): Promise<any> {
-        return await this.authService.jwtLogin(request.user)
+    async login(@Request() req): Promise<any> {
+      return await this.authService.createLoginPayload(req.user)
     }
 
     @Get('/google')
     @UseGuards(GoogleAuthGuard)
-    async googleAuth(@Request() request) { }
+    async googleLogin(@Request() req): Promise<any> {
+      // initiates the Google OAuth2 login flow (see guard)
+    }
 
     @Get('/google/redirect')
     @UseGuards(GoogleAuthGuard)
-    googleAuthRedirect(@Request() request) {
-        return this.authService.googleLogin(request)
+    googleLoginRedirect(@Request() req): Promise<any> {
+      return this.authService.handleProviderLogin(req.user)
+    }
+
+    @Get('/facebook')
+    @UseGuards(FacebookAuthGuard)
+    @HttpCode(200)
+    async facebookLogin(@Request() req): Promise<any> {
+      // initiates the Facebook OAuth2 login flow (see guard)
+    }
+
+    @Get('/facebook/redirect')
+    @UseGuards(FacebookAuthGuard)
+    @HttpCode(200)
+    async facebookLoginRedirect(@Request() req): Promise<any> {
+      return this.authService.handleProviderLogin(req.user)
+    }
+
+
+    @Get('/discord')
+    @UseGuards(DiscordAuthGuard)
+    @HttpCode(200)
+    async discordLogin(@Request() req): Promise<any> {
+      // initiates the Discord OAuth2 login flow
+    }
+
+    @Get('/discord/redirect')
+    @UseGuards(DiscordAuthGuard)
+    @HttpCode(200)
+    async discordLoginRedirect(@Request() req): Promise<any> {
+      return this.authService.handleProviderLogin(req.user)
     }
 }

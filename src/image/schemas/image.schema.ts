@@ -1,16 +1,14 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, Types } from "mongoose";
+import { Document, ObjectId, SchemaTypes, Types } from "mongoose";
+import { ImageStatus } from "../enums/image-status.enum";
 
 @Schema({ timestamps: true })
 export class Image {
-
-    id?: Types.ObjectId
-    
-    @Prop({ unique: true })
+    @Prop({ unique: true, required: true })
     uri: string
 
-    @Prop()
-    author: string
+    @Prop({ type: SchemaTypes.ObjectId, ref: 'User' })
+    author: ObjectId | Types.ObjectId
 
     @Prop()
     resolution: string
@@ -26,6 +24,9 @@ export class Image {
 
     @Prop()
     tags: Array<string>
+
+    @Prop({ default: ImageStatus.ACTIVE})
+    status: ImageStatus
 }
 
 export type ImageDocument = Image & Document

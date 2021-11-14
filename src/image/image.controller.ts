@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, ValidationPipe } from '@nestjs/common';
-import { Types } from 'mongoose';
+import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Query, ValidationPipe } from '@nestjs/common';
+import { ObjectId, Types } from 'mongoose';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
 import { Image } from './schemas/image.schema';
 import { ImageService } from './image.service';
+import { query } from 'express';
+import { DeleteTypeDto } from './dto/delete-type.dto';
 
 @Controller('image')
 export class ImageController {
@@ -14,25 +16,30 @@ export class ImageController {
         return this.imageService.findAll()
     }
 
+    @Get('/:id')
+    async findOneById(@Param('id') id: ObjectId): Promise<Image> {
+        return this.imageService.findOneById(id)
+    }
+
     @Post() 
     async create(@Body(new ValidationPipe({
         transform: true,
         whitelist: true
-    })) data: CreateImageDto) {
+    })) data: CreateImageDto): Promise<Image> {
         return await this.imageService.create(data)
     }
 
-    @Patch("/:id")
+    @Patch('/:id')
     async update(@Body(new ValidationPipe({
         transform: true,
         whitelist: true
-    })) data : UpdateImageDto, @Param('id') id: Types.ObjectId) {
+    })) data : UpdateImageDto, @Param('id') id: ObjectId): Promise<Image> {
         return await this.imageService.update(data, id)
     }
 
     @HttpCode(204)
-    @Delete('/delete/:id')
-    async delete(@Param('id') id: Types.ObjectId) {
-        return await this.imageService.delete(id)
+    @Delete('/:id')
+    async delete(@Param('id') id: ObjectId, @Query(new ValidationPipe()) { type }: DeleteTypeDto): Promise<void> {
+        return await this.imageService.delete(id, type)
     }
 }
