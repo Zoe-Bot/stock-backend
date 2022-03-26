@@ -1,15 +1,14 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Query, ValidationPipe } from '@nestjs/common';
-import { ObjectId, Types } from 'mongoose';
+import { ObjectId } from 'mongoose';
 import { CreateImageDto } from './dto/create-image.dto';
-import { UpdateImageDto } from './dto/update-image.dto';
-import { Image } from './schemas/image.schema';
-import { ImageService } from './image.service';
-import { query } from 'express';
 import { DeleteTypeDto } from './dto/delete-type.dto';
+import { UpdateImageDto } from './dto/update-image.dto';
+import { ImageService } from './image.service';
+import { Image } from './schemas/image.schema';
 
 @Controller('image')
 export class ImageController {
-    constructor(private readonly imageService: ImageService) {}
+    constructor(private readonly imageService: ImageService) { }
 
     @Get()
     async findAll(): Promise<Image[]> {
@@ -21,7 +20,7 @@ export class ImageController {
         return this.imageService.findOneById(id)
     }
 
-    @Post() 
+    @Post()
     async create(@Body(new ValidationPipe({
         transform: true,
         whitelist: true
@@ -33,7 +32,7 @@ export class ImageController {
     async update(@Body(new ValidationPipe({
         transform: true,
         whitelist: true
-    })) data : UpdateImageDto, @Param('id') id: ObjectId): Promise<Image> {
+    })) data: UpdateImageDto, @Param('id') id: ObjectId): Promise<Image> {
         return await this.imageService.update(data, id)
     }
 
